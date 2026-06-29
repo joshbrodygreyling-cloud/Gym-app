@@ -1,14 +1,14 @@
-# FitForge — Your Complete Gym Companion 🏋️
+# LiftIQ — Your Complete Gym Companion 🏋️
 
-FitForge is a mobile-first web app that helps gym-goers train smarter and stay
-consistent. Tell it about yourself and your goal, and it forges a personalised
+LiftIQ is a mobile-first web app that helps gym-goers train smarter and stay
+consistent. Tell it about yourself and your goal, and it builds a personalised
 workout plan, helps you figure out any machine, and keeps your gym streak alive.
 
 ## Features
 
 ### 🎯 Goal-based workout plans (the core)
 Answer a few questions — age, weight, height, sex, goal, experience, available
-equipment, and days per week — and FitForge builds a complete weekly routine:
+equipment, and days per week — and LiftIQ builds a complete weekly routine:
 
 - **Smart splits** that scale with your schedule: full-body (1–2 days),
   push/pull/legs (3 or 5–6 days), or upper/lower (4 days).
@@ -24,7 +24,7 @@ equipment, and days per week — and FitForge builds a complete weekly routine:
 - Refresh for a fresh variation any time.
 
 ### 📸 Machine identifier
-Not sure how to use a machine? Snap or upload a photo and FitForge identifies it
+Not sure how to use a machine? Snap or upload a photo and LiftIQ identifies it
 and explains how to use it safely. Photo recognition is powered by Claude vision
 (add your own Anthropic API key in Settings — it's stored only on your device).
 No key needed to get value: a forgiving name search covers every machine in the
@@ -59,7 +59,7 @@ Log every exercise with weight and reps per set:
 
 - Pick an exercise (from the library or a custom name), set a rep goal, and
   record each set.
-- The next time you train that lift, FitForge reads your last session and tells
+- The next time you train that lift, LiftIQ reads your last session and tells
   you **exactly what to do**: hit all your reps cleanly → it suggests adding
   weight (+2.5 kg isolation / +5 kg big compound lifts, or lb equivalents);
   fell short → it tells you to repeat the weight and chase the missing reps; had

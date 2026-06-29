@@ -1,9 +1,9 @@
 {
-  "name": "fitforge",
+  "name": "liftiq",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "FitForge - your complete gym companion: machine identifier, goal-based workout plans, and consistency streaks.",
+  "description": "LiftIQ - your complete gym companion: machine identifier, goal-based workout plans, and consistency streaks.",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

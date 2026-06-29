@@ -27,7 +27,7 @@ export function searchExercises(query: string): Exercise[] {
 // leaves their browser except in the direct API call they opt into.
 // ---------------------------------------------------------------------------
 
-const API_KEY_STORAGE = 'fitforge.anthropicKey'
+const API_KEY_STORAGE = 'liftiq.anthropicKey'
 
 export function getApiKey(): string {
   return localStorage.getItem(API_KEY_STORAGE) ?? ''

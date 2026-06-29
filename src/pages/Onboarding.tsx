@@ -14,7 +14,7 @@ export default function Onboarding() {
           <DumbbellIcon className="h-7 w-7" />
         </span>
         <h1 className="text-2xl font-extrabold tracking-tight">
-          Welcome to Fit<span className="text-brand-400">Forge</span>
+          Welcome to Lift<span className="text-brand-400">IQ</span>
         </h1>
         <p className="mx-auto mt-2 max-w-md text-sm text-white/55">
           Your complete gym companion. Tell us about yourself and your goal, and we’ll forge a personalised workout plan,

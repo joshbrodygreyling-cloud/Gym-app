@@ -5,10 +5,10 @@ import { computeStats } from '../lib/streak'
 import { generatePlan } from '../lib/planGenerator'
 
 const KEYS = {
-  profile: 'fitforge.profile',
-  plan: 'fitforge.plan',
-  visits: 'fitforge.visits',
-  lifts: 'fitforge.lifts',
+  profile: 'liftiq.profile',
+  plan: 'liftiq.plan',
+  visits: 'liftiq.visits',
+  lifts: 'liftiq.lifts',
 }
 
 function load<T>(key: string, fallback: T): T {

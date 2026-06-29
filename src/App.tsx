@@ -53,7 +53,7 @@ function Header() {
             <DumbbellIcon className="h-5 w-5" />
           </span>
           <span className="text-lg font-extrabold tracking-tight">
-            Fit<span className="text-brand-400">Forge</span>
+            Lift<span className="text-brand-400">IQ</span>
           </span>
         </NavLink>
         <NavLink

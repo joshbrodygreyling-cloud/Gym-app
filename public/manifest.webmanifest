@@ -1,6 +1,6 @@
 {
-  "name": "FitForge — Your Gym Companion",
-  "short_name": "FitForge",
+  "name": "LiftIQ — Your Gym Companion",
+  "short_name": "LiftIQ",
   "description": "Identify gym machines, get goal-based workout plans, and build a streak.",
   "start_url": "/",
   "display": "standalone",
