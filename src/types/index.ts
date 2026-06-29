@@ -79,19 +79,27 @@ export interface PlannedSet {
 
 export interface WorkoutDay {
   title: string
-  focus: string
-  warmup: string
+  focus?: string
+  warmup?: string
   blocks: PlannedSet[]
   finisher?: string
+  /** a planned recovery day with no exercises */
+  isRestDay?: boolean
 }
 
+export type PlanSource = 'generated' | 'custom'
+
 export interface WorkoutPlan {
+  /** how the plan was created — auto-generated or hand-built by the user */
+  source: PlanSource
+  /** user-given name for custom plans */
+  name?: string
   goal: Goal
   daysPerWeek: number
   experience: Experience
   equipment: Equipment
-  summary: string
-  weeklyVolumeNote: string
+  summary?: string
+  weeklyVolumeNote?: string
   days: WorkoutDay[]
   generatedAt: string
 }

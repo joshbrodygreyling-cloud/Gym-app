@@ -35,6 +35,9 @@ interface AppState {
   lifts: LiftEntry[]
   saveProfile: (p: Profile) => void
   regeneratePlan: () => void
+  generatePlanNow: () => void
+  saveCustomPlan: (p: WorkoutPlan) => void
+  clearPlan: () => void
   toggleVisit: (dateKey: string) => void
   logToday: () => void
   hasVisit: (dateKey: string) => boolean
@@ -58,13 +61,22 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const saveProfile = (p: Profile) => {
     setProfile(p)
-    // (Re)generate a plan whenever the profile is saved.
-    setPlan(generatePlan(p))
+    // Keep an auto-generated plan in sync with the profile, but never overwrite
+    // a routine the user built themselves.
+    setPlan((prev) => (prev && prev.source === 'generated' ? generatePlan(p) : prev))
   }
 
   const regeneratePlan = () => {
     if (profile) setPlan(generatePlan(profile))
   }
+
+  const generatePlanNow = () => {
+    if (profile) setPlan(generatePlan(profile))
+  }
+
+  const saveCustomPlan = (p: WorkoutPlan) => setPlan(p)
+
+  const clearPlan = () => setPlan(null)
 
   const toggleVisit = (dateKey: string) => {
     setVisits((prev) => (prev.includes(dateKey) ? prev.filter((d) => d !== dateKey) : [...prev, dateKey]))
@@ -96,6 +108,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
     lifts,
     saveProfile,
     regeneratePlan,
+    generatePlanNow,
+    saveCustomPlan,
+    clearPlan,
     toggleVisit,
     logToday,
     hasVisit,

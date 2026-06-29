@@ -282,6 +282,7 @@ export function generatePlan(profile: Profile): WorkoutPlan {
   })
 
   return {
+    source: 'generated',
     goal,
     daysPerWeek,
     experience,

@@ -23,10 +23,10 @@ export default function Onboarding() {
       </div>
 
       <ProfileForm
-        submitLabel="Build my plan →"
+        submitLabel="Continue →"
         onSubmit={(p) => {
           saveProfile(p)
-          navigate('/')
+          navigate('/plan/setup')
         }}
       />
     </div>

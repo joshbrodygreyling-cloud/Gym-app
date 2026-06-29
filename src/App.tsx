@@ -4,6 +4,8 @@ import { CameraIcon, ChartIcon, DumbbellIcon, FlameIcon, HomeIcon, UserIcon } fr
 import Dashboard from './pages/Dashboard'
 import Onboarding from './pages/Onboarding'
 import PlanPage from './pages/PlanPage'
+import PlanSetup from './pages/PlanSetup'
+import CustomPlanBuilder from './pages/CustomPlanBuilder'
 import IdentifyPage from './pages/IdentifyPage'
 import StreakPage from './pages/StreakPage'
 import LibraryPage from './pages/LibraryPage'
@@ -92,6 +94,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/plan" element={<PlanPage />} />
+          <Route path="/plan/setup" element={<PlanSetup />} />
+          <Route path="/plan/build" element={<CustomPlanBuilder />} />
           <Route path="/identify" element={<IdentifyPage />} />
           <Route path="/streak" element={<StreakPage />} />
           <Route path="/library" element={<LibraryPage />} />

@@ -5,7 +5,7 @@ import ProfileForm from '../components/ProfileForm'
 import { getApiKey, setApiKey } from '../lib/machineId'
 
 export default function ProfilePage() {
-  const { profile, saveProfile, resetAll } = useApp()
+  const { profile, plan, saveProfile, resetAll } = useApp()
   const navigate = useNavigate()
   const [saved, setSaved] = useState(false)
   const [keyInput, setKeyInput] = useState(getApiKey())
@@ -17,18 +17,22 @@ export default function ProfilePage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-extrabold tracking-tight">Profile & Settings</h1>
-        <p className="mt-1 text-sm text-white/55">Update your details and we’ll rebuild your plan to match.</p>
+        <p className="mt-1 text-sm text-white/55">
+          Update your details. Auto-generated plans rebuild to match; your own custom routine stays untouched.
+        </p>
       </div>
 
       {saved && (
         <div className="rounded-xl border border-brand-400/30 bg-brand-500/10 p-3 text-sm text-brand-100">
-          Saved! Your workout plan has been updated.
+          {plan?.source === 'custom'
+            ? 'Saved! Your custom routine was kept as-is.'
+            : 'Saved! Your workout plan has been updated.'}
         </div>
       )}
 
       <ProfileForm
         initial={profile}
-        submitLabel="Save & rebuild plan"
+        submitLabel="Save profile"
         onSubmit={(p) => {
           saveProfile(p)
           setSaved(true)

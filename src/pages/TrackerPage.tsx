@@ -26,8 +26,20 @@ const PROGRESSION_ICON: Record<string, string> = {
 }
 
 export default function TrackerPage() {
-  const { lifts, addLift, deleteLift, profile } = useApp()
+  const { lifts, addLift, deleteLift, profile, plan } = useApp()
   const defaultUnit: 'kg' | 'lb' = profile?.units === 'imperial' ? 'lb' : 'kg'
+
+  // Unique exercises from the user's current plan (generated or custom) for quick logging.
+  const planExercises = useMemo(() => {
+    if (!plan) return [] as { id: string; name: string }[]
+    const seen = new Map<string, string>()
+    for (const day of plan.days) {
+      for (const b of day.blocks) {
+        if (!seen.has(b.exerciseId)) seen.set(b.exerciseId, b.exerciseName)
+      }
+    }
+    return [...seen.entries()].map(([id, name]) => ({ id, name }))
+  }, [plan])
 
   const [query, setQuery] = useState('')
   const [selected, setSelected] = useState<Selected | null>(null)
@@ -152,6 +164,23 @@ export default function TrackerPage() {
               >
                 Log “{query.trim()}” as a custom exercise
               </button>
+            )}
+
+            {!query && planExercises.length > 0 && (
+              <div>
+                <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-wide text-brand-200/80">From your plan</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {planExercises.map((ex) => (
+                    <button
+                      key={ex.id}
+                      onClick={() => selectExercise(ex.id, ex.name)}
+                      className="rounded-lg border border-white/10 bg-white/[0.03] px-2.5 py-1.5 text-xs font-medium text-white/75 hover:border-brand-400/40"
+                    >
+                      {ex.name}
+                    </button>
+                  ))}
+                </div>
+              </div>
             )}
           </>
         )}

@@ -6,7 +6,20 @@ workout plan, helps you figure out any machine, and keeps your gym streak alive.
 
 ## Features
 
-### 🎯 Goal-based workout plans (the core)
+### 🎯 Workout plans — two ways (the core)
+After setting up your profile you choose how to build your routine:
+
+1. **Generate a Plan** — LiftIQ auto-builds a personalised weekly routine from
+   your goal, experience, equipment and schedule (details below).
+2. **Upload Your Own Routine** — build your plan by hand: add training days and
+   rest days, with exercises, sets, reps and rest for each. Edit it any time.
+
+You can switch between the two whenever you like from the plan screen, and the
+**lift tracker works with either** — it surfaces your plan's exercises as
+quick-pick chips and gives progressive-overload suggestions and history no
+matter which path you chose.
+
+#### Generate a Plan
 Answer a few questions — age, weight, height, sex, goal, experience, available
 equipment, and days per week — and LiftIQ builds a complete weekly routine:
 

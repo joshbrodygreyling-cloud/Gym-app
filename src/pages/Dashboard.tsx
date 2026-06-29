@@ -82,15 +82,28 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* No plan yet -> nudge to set one up */}
+      {!plan && (
+        <Link to="/plan/setup" className="card block border-brand-400/30 transition hover:border-brand-400/60">
+          <p className="text-xs font-semibold uppercase tracking-wide text-brand-200/80">Get started</p>
+          <h2 className="mt-1 text-xl font-bold text-white">Set up your workout plan</h2>
+          <p className="text-sm text-white/55">Generate a personalised plan, or build your own routine.</p>
+          <p className="mt-3 text-sm font-semibold text-brand-300">Choose how →</p>
+        </Link>
+      )}
+
       {/* Today's workout */}
       {todaysWorkout && (
         <Link to="/plan" className="card block transition hover:border-brand-400/40">
           <div className="flex items-center justify-between">
-            <p className="text-xs font-semibold uppercase tracking-wide text-brand-200/80">Today’s suggested session</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-brand-200/80">
+              {todaysWorkout.isRestDay ? 'Today’s plan' : 'Today’s suggested session'}
+            </p>
             <DumbbellIcon className="h-5 w-5 text-brand-300" />
           </div>
           <h2 className="mt-1 text-xl font-bold text-white">{todaysWorkout.title}</h2>
-          <p className="text-sm text-white/55">{todaysWorkout.focus}</p>
+          {todaysWorkout.focus && <p className="text-sm text-white/55">{todaysWorkout.focus}</p>}
+          {todaysWorkout.isRestDay && <p className="text-sm text-white/55">Rest & recover 😴</p>}
           <div className="mt-3 flex flex-wrap gap-1.5">
             {todaysWorkout.blocks.slice(0, 4).map((b) => (
               <span key={b.exerciseId} className="rounded-lg bg-white/[0.04] px-2 py-1 text-xs text-white/70">
