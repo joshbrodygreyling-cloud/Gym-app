@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: #07120d;
+  color: #e8f3ec;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle gradient backdrop */
+#root {
+  background:
+    radial-gradient(1200px 600px at 100% -10%, rgba(35, 161, 104, 0.15), transparent),
+    radial-gradient(900px 500px at -10% 110%, rgba(35, 161, 104, 0.12), transparent);
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-white/5 bg-white/[0.03] p-5 shadow-lg shadow-black/20 backdrop-blur;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn bg-brand-500 text-white hover:bg-brand-400;
+  }
+  .btn-ghost {
+    @apply btn border border-white/10 bg-white/[0.02] text-brand-50 hover:bg-white/[0.06];
+  }
+  .input {
+    @apply w-full rounded-xl border border-white/10 bg-black/30 px-3.5 py-2.5 text-sm text-white outline-none transition focus:border-brand-400 focus:ring-2 focus:ring-brand-500/30 placeholder:text-white/30;
+  }
+  .label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wide text-brand-200/80;
+  }
+  .chip {
+    @apply cursor-pointer rounded-xl border px-3 py-2 text-center text-sm font-medium transition;
+  }
+  .chip-on {
+    @apply border-brand-400 bg-brand-500/20 text-white;
+  }
+  .chip-off {
+    @apply border-white/10 bg-white/[0.02] text-white/70 hover:border-white/25;
+  }
+}
+
+/* Hide scrollbars on horizontal nav, keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

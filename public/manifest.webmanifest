@@ -1,0 +1,17 @@
+{
+  "name": "FitForge — Your Gym Companion",
+  "short_name": "FitForge",
+  "description": "Identify gym machines, get goal-based workout plans, and build a streak.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07261b",
+  "theme_color": "#07261b",
+  "icons": [
+    {
+      "src": "/dumbbell.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
