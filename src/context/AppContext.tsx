@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import type { ReactNode } from 'react'
-import type { Profile, WorkoutPlan } from '../types'
+import type { LiftEntry, Profile, WorkoutPlan } from '../types'
 import { computeStats } from '../lib/streak'
 import { generatePlan } from '../lib/planGenerator'
 
@@ -8,6 +8,7 @@ const KEYS = {
   profile: 'fitforge.profile',
   plan: 'fitforge.plan',
   visits: 'fitforge.visits',
+  lifts: 'fitforge.lifts',
 }
 
 function load<T>(key: string, fallback: T): T {
@@ -31,11 +32,14 @@ interface AppState {
   profile: Profile | null
   plan: WorkoutPlan | null
   visits: string[]
+  lifts: LiftEntry[]
   saveProfile: (p: Profile) => void
   regeneratePlan: () => void
   toggleVisit: (dateKey: string) => void
   logToday: () => void
   hasVisit: (dateKey: string) => boolean
+  addLift: (entry: LiftEntry) => void
+  deleteLift: (id: string) => void
   resetAll: () => void
 }
 
@@ -45,10 +49,12 @@ export function AppProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<Profile | null>(() => load(KEYS.profile, null))
   const [plan, setPlan] = useState<WorkoutPlan | null>(() => load(KEYS.plan, null))
   const [visits, setVisits] = useState<string[]>(() => load(KEYS.visits, []))
+  const [lifts, setLifts] = useState<LiftEntry[]>(() => load(KEYS.lifts, []))
 
   useEffect(() => save(KEYS.profile, profile), [profile])
   useEffect(() => save(KEYS.plan, plan), [plan])
   useEffect(() => save(KEYS.visits, visits), [visits])
+  useEffect(() => save(KEYS.lifts, lifts), [lifts])
 
   const saveProfile = (p: Profile) => {
     setProfile(p)
@@ -72,10 +78,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   const hasVisit = (dateKey: string) => visits.includes(dateKey)
 
+  const addLift = (entry: LiftEntry) => setLifts((prev) => [entry, ...prev])
+  const deleteLift = (id: string) => setLifts((prev) => prev.filter((e) => e.id !== id))
+
   const resetAll = () => {
     setProfile(null)
     setPlan(null)
     setVisits([])
+    setLifts([])
     Object.values(KEYS).forEach((k) => localStorage.removeItem(k))
   }
 
@@ -83,11 +93,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
     profile,
     plan,
     visits,
+    lifts,
     saveProfile,
     regeneratePlan,
     toggleVisit,
     logToday,
     hasVisit,
+    addLift,
+    deleteLift,
     resetAll,
   }
 

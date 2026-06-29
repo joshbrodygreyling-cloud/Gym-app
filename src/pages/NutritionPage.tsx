@@ -2,6 +2,7 @@ import { useApp } from '../context/AppContext'
 import { computeNutrition } from '../lib/nutrition'
 import { GOAL_LABELS } from '../lib/planGenerator'
 import { Link } from 'react-router-dom'
+import MealPlanSection from '../components/MealPlanSection'
 
 function MacroBar({ proteinG, carbsG, fatG }: { proteinG: number; carbsG: number; fatG: number }) {
   const pCal = proteinG * 4
@@ -62,6 +63,8 @@ export default function NutritionPage() {
               High protein supports muscle and recovery. Carbs fuel your training; fats keep hormones healthy.
             </p>
           </div>
+
+          <MealPlanSection targets={n} goal={profile.goal} />
 
           <div className="grid grid-cols-3 gap-3">
             <div className="card text-center">

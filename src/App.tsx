@@ -1,6 +1,6 @@
 import { NavLink, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { useApp } from './context/AppContext'
-import { BookIcon, CameraIcon, DumbbellIcon, FlameIcon, HomeIcon, UserIcon } from './components/Icons'
+import { CameraIcon, ChartIcon, DumbbellIcon, FlameIcon, HomeIcon, UserIcon } from './components/Icons'
 import Dashboard from './pages/Dashboard'
 import Onboarding from './pages/Onboarding'
 import PlanPage from './pages/PlanPage'
@@ -10,13 +10,14 @@ import LibraryPage from './pages/LibraryPage'
 import ProfilePage from './pages/ProfilePage'
 import NutritionPage from './pages/NutritionPage'
 import ToolsPage from './pages/ToolsPage'
+import TrackerPage from './pages/TrackerPage'
 
 const NAV = [
   { to: '/', label: 'Home', icon: HomeIcon, end: true },
   { to: '/plan', label: 'Plan', icon: DumbbellIcon, end: false },
+  { to: '/track', label: 'Track', icon: ChartIcon, end: false },
   { to: '/identify', label: 'Identify', icon: CameraIcon, end: false },
   { to: '/streak', label: 'Streak', icon: FlameIcon, end: false },
-  { to: '/library', label: 'Library', icon: BookIcon, end: false },
 ]
 
 function BottomNav() {
@@ -94,6 +95,7 @@ export default function App() {
           <Route path="/identify" element={<IdentifyPage />} />
           <Route path="/streak" element={<StreakPage />} />
           <Route path="/library" element={<LibraryPage />} />
+          <Route path="/track" element={<TrackerPage />} />
           <Route path="/nutrition" element={<NutritionPage />} />
           <Route path="/tools" element={<ToolsPage />} />
           <Route path="/profile" element={<ProfilePage />} />

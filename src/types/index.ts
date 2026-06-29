@@ -111,3 +111,23 @@ export interface StreakStats {
   visitsThisMonth: number
   weeklyGoalMet: boolean
 }
+
+// ---------- Lift tracker ----------
+
+export interface LiftSet {
+  weight: number
+  reps: number
+}
+
+export interface LiftEntry {
+  id: string
+  /** matches an Exercise id when chosen from the library, else a free-text slug */
+  exerciseId: string
+  exerciseName: string
+  /** ISO date string "2026-06-29" */
+  date: string
+  unit: 'kg' | 'lb'
+  /** the rep target the user was aiming for each set */
+  repGoal: number
+  sets: LiftSet[]
+}

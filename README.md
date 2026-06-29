@@ -40,7 +40,7 @@ library instantly.
 A browsable, searchable library of machines and exercises, each with how-to
 steps, coaching tips, and common mistakes to avoid. Filter by muscle group.
 
-### 🥗 Nutrition targets
+### 🥗 Nutrition targets & meal plans
 Personalised daily calorie and macro targets calculated from your stats:
 
 - **BMR** via the Mifflin–St Jeor equation and **TDEE** from your training
@@ -48,6 +48,24 @@ Personalised daily calorie and macro targets calculated from your stats:
 - Calories adjusted for your goal (deficit, surplus or maintenance).
 - Protein / carbs / fat breakdown plus a daily water guideline and practical
   eating tips.
+- **Full day meal plans** — generate breakfast, lunch, dinner and a snack built
+  to hit your targets, each with its own calories and macros and a running day
+  total. Meals are biased toward higher protein for muscle/fat-loss goals,
+  portions auto-scale to your calorie target, there's a vegetarian-only toggle,
+  and you can shuffle for fresh variations.
+
+### 📈 Lift tracker with progressive overload
+Log every exercise with weight and reps per set:
+
+- Pick an exercise (from the library or a custom name), set a rep goal, and
+  record each set.
+- The next time you train that lift, FitForge reads your last session and tells
+  you **exactly what to do**: hit all your reps cleanly → it suggests adding
+  weight (+2.5 kg isolation / +5 kg big compound lifts, or lb equivalents);
+  fell short → it tells you to repeat the weight and chase the missing reps; had
+  a real grind → it suggests a small deload.
+- Tracks your **personal records** (heaviest lifted and estimated 1RM) and full
+  per-exercise history.
 
 ### ⏱️ Built-in rest timer
 Every exercise in your plan has a one-tap countdown rest timer (pre-set to the

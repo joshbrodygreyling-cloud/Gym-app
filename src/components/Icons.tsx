@@ -78,6 +78,15 @@ export function CheckIcon({ className }: IconProps) {
   )
 }
 
+export function ChartIcon({ className }: IconProps) {
+  return (
+    <svg {...base(className)}>
+      <path d="M3 3v18h18" />
+      <path d="m19 9-5 5-4-4-3 3" />
+    </svg>
+  )
+}
+
 export function SparkIcon({ className }: IconProps) {
   return (
     <svg {...base(className)}>

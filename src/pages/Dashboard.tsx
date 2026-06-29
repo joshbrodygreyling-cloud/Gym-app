@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useApp, useStreak } from '../context/AppContext'
 import { GOAL_LABELS } from '../lib/planGenerator'
 import { todayKey } from '../lib/streak'
-import { CameraIcon, CheckIcon, DumbbellIcon, FlameIcon } from '../components/Icons'
+import { ChartIcon, CheckIcon, DumbbellIcon, FlameIcon } from '../components/Icons'
 
 function bmiInfo(weightKg: number | null, heightCm: number | null) {
   if (!weightKg || !heightCm) return null
@@ -109,10 +109,10 @@ export default function Dashboard() {
 
       {/* Quick actions */}
       <div className="grid grid-cols-2 gap-3">
-        <Link to="/identify" className="card flex flex-col gap-2 transition hover:border-brand-400/40">
-          <CameraIcon className="h-6 w-6 text-brand-300" />
-          <span className="font-semibold text-white">Identify a machine</span>
-          <span className="text-xs text-white/50">Snap a photo, learn how to use it</span>
+        <Link to="/track" className="card flex flex-col gap-2 transition hover:border-brand-400/40">
+          <ChartIcon className="h-6 w-6 text-brand-300" />
+          <span className="font-semibold text-white">Lift tracker</span>
+          <span className="text-xs text-white/50">Log lifts, get overload tips</span>
         </Link>
         <Link to="/nutrition" className="card flex flex-col gap-2 transition hover:border-brand-400/40">
           <span className="text-2xl leading-none">🥗</span>
