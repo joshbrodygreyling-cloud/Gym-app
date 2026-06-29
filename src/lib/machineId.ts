@@ -61,6 +61,90 @@ function fileToBase64(file: File): Promise<{ data: string; mediaType: string }> 
 }
 
 /**
+ * Downscale a photo to keep the upload small (phone photos are several MB).
+ * Returns JPEG base64. Falls back to the raw file if canvas isn't available.
+ */
+async function fileToCompressedBase64(
+  file: File,
+  maxDim = 1280,
+): Promise<{ data: string; mediaType: string }> {
+  try {
+    const bitmap = await createImageBitmap(file)
+    const scale = Math.min(1, maxDim / Math.max(bitmap.width, bitmap.height))
+    const w = Math.max(1, Math.round(bitmap.width * scale))
+    const h = Math.max(1, Math.round(bitmap.height * scale))
+    const canvas = document.createElement('canvas')
+    canvas.width = w
+    canvas.height = h
+    const ctx = canvas.getContext('2d')
+    if (!ctx) throw new Error('no-2d-context')
+    ctx.drawImage(bitmap, 0, 0, w, h)
+    const dataUrl = canvas.toDataURL('image/jpeg', 0.82)
+    const data = dataUrl.split(',')[1]
+    return { data, mediaType: 'image/jpeg' }
+  } catch {
+    return fileToBase64(file)
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Server-proxied identification (uses ANTHROPIC_API_KEY on the server).
+// ---------------------------------------------------------------------------
+
+/** Thrown when the server endpoint has no API key configured. */
+export const SERVER_NOT_CONFIGURED = 'SERVER_NOT_CONFIGURED'
+
+async function identifyViaServer(file: File): Promise<VisionResult> {
+  const { data, mediaType } = await fileToCompressedBase64(file)
+
+  let res: Response
+  try {
+    res = await fetch('/api/identify', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ imageBase64: data, mediaType }),
+    })
+  } catch {
+    // No server reachable (e.g. local `vite` dev with no functions running).
+    throw new Error(SERVER_NOT_CONFIGURED)
+  }
+
+  // 404 (no function deployed) or 501 (no key configured) -> let caller fall back.
+  if (res.status === 404 || res.status === 501) throw new Error(SERVER_NOT_CONFIGURED)
+  if (!res.ok) throw new Error(`Identification failed (${res.status}). Please try again.`)
+
+  // In plain `vite` dev/preview there's no function, so the SPA fallback returns
+  // HTML — treat anything that isn't JSON as "no server" and fall back.
+  if (!res.headers.get('content-type')?.includes('application/json')) {
+    throw new Error(SERVER_NOT_CONFIGURED)
+  }
+
+  const json = (await res.json()) as { rawName?: string; description?: string }
+  const rawName = json.rawName ?? 'Gym machine'
+  const description = json.description ?? ''
+  const match = searchExercises(rawName)[0]
+  return { match, description, rawName }
+}
+
+/**
+ * Identify a machine from a photo. Tries the server endpoint first (shared key
+ * via env var); if that isn't configured, falls back to a user-supplied key
+ * stored on the device, and otherwise reports NO_API_KEY so the UI can prompt.
+ */
+export async function identifyMachine(file: File): Promise<VisionResult> {
+  try {
+    return await identifyViaServer(file)
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : ''
+    if (msg === SERVER_NOT_CONFIGURED) {
+      if (getApiKey()) return identifyMachineWithAI(file)
+      throw new Error('NO_API_KEY')
+    }
+    throw err
+  }
+}
+
+/**
  * Ask Claude to identify the machine in a photo. Returns a description plus the
  * closest match in our local library so we can show full how-to instructions.
  */

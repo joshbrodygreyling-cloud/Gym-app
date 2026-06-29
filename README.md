@@ -119,10 +119,33 @@ The generator (`src/lib/planGenerator.ts`) combines three inputs:
    your equipment and capped to your experience level, always anchoring each
    session with compound lifts before isolation work.
 
-## Optional: AI photo identification
+## AI photo identification (machine identifier)
+
+The machine identifier sends the photo to Claude's vision model. There are two
+ways to power it:
+
+### Recommended: a shared key via environment variable (server-side)
+
+The app ships with a serverless function (`api/identify.ts`) that calls Claude
+using an `ANTHROPIC_API_KEY` read **on the server** — so the key is never exposed
+to the browser. With this set, photo identification works for everyone with no
+per-user setup.
 
 1. Get an API key from the [Anthropic Console](https://console.anthropic.com/).
-2. Open **Profile & Settings** in the app and paste it in (or add it the first
-   time you upload a photo).
-3. The key lives only in your browser's local storage and is used solely for
-   your own photo lookups.
+2. **Local dev:** copy `.env.example` to `.env.local` and set `ANTHROPIC_API_KEY`.
+   Run with the Vercel CLI (`vercel dev`) so the `api/` function is served.
+   > Plain `vite dev` doesn't run the serverless function — the app detects this
+   > and falls back to text search (or a device key, below).
+3. **Production (Vercel):** add `ANTHROPIC_API_KEY` under **Project → Settings →
+   Environment Variables**, then deploy.
+
+> ⚠️ Do **not** name it `VITE_ANTHROPIC_API_KEY` or otherwise expose it to the
+> client — Vite inlines `VITE_`-prefixed vars into the public bundle, which would
+> leak the secret to every visitor. Keep it server-side only.
+
+### Fallback: a personal key on your device
+
+No server key? Open **Profile & Settings** (or upload a photo) and paste your own
+Anthropic API key. It's stored only in your browser's local storage and used
+solely for your own lookups. Either way, the name search covers every machine in
+the library with no key at all.

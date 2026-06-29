@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { getApiKey, identifyMachineWithAI, searchExercises, setApiKey } from '../lib/machineId'
+import { getApiKey, identifyMachine, searchExercises, setApiKey } from '../lib/machineId'
 import type { VisionResult } from '../lib/machineId'
 import type { Exercise } from '../types'
 import ExerciseCard from '../components/ExerciseCard'
@@ -23,13 +23,10 @@ export default function IdentifyPage() {
     setAiResult(null)
     setPreview(URL.createObjectURL(file))
 
-    if (!getApiKey()) {
-      setError('NO_API_KEY')
-      return
-    }
+    // Tries the server key first, then a device key; only NO_API_KEY if neither.
     setLoading(true)
     try {
-      const result = await identifyMachineWithAI(file)
+      const result = await identifyMachine(file)
       setAiResult(result)
     } catch (e) {
       const msg = e instanceof Error ? e.message : 'Something went wrong'
@@ -113,10 +110,12 @@ export default function IdentifyPage() {
         {/* No-key explainer */}
         {error === 'NO_API_KEY' && (
           <div className="rounded-xl border border-amber-400/30 bg-amber-400/10 p-4 text-sm">
-            <p className="font-semibold text-amber-100">Photo recognition needs a one-time setup</p>
+            <p className="font-semibold text-amber-100">Photo recognition isn’t switched on</p>
             <p className="mt-1 text-amber-100/80">
-              Add a free Anthropic API key to turn on AI photo identification. It’s stored only on this device. No key?
-              No problem — just search by name below, it covers every machine in our library.
+              AI photo identification turns on automatically once the app is deployed with an{' '}
+              <code>ANTHROPIC_API_KEY</code> set on the server. Want it on just for this device in the meantime? Add your
+              own Anthropic API key below — it’s stored only on this device. Either way, you can search by name below; it
+              covers every machine in our library.
             </p>
             <button onClick={() => setShowKey((s) => !s)} className="btn-ghost mt-3">
               {showKey ? 'Hide' : hasKey ? 'Update API key' : 'Add API key'}
