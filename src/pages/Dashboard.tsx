@@ -114,6 +114,16 @@ export default function Dashboard() {
           <span className="font-semibold text-white">Identify a machine</span>
           <span className="text-xs text-white/50">Snap a photo, learn how to use it</span>
         </Link>
+        <Link to="/nutrition" className="card flex flex-col gap-2 transition hover:border-brand-400/40">
+          <span className="text-2xl leading-none">🥗</span>
+          <span className="font-semibold text-white">Nutrition targets</span>
+          <span className="text-xs text-white/50">Calories & macros for your goal</span>
+        </Link>
+        <Link to="/tools" className="card flex flex-col gap-2 transition hover:border-brand-400/40">
+          <span className="text-2xl leading-none">🧮</span>
+          <span className="font-semibold text-white">Gym tools</span>
+          <span className="text-xs text-white/50">1RM & plate calculators</span>
+        </Link>
         <Link to="/library" className="card flex flex-col gap-2 transition hover:border-brand-400/40">
           <DumbbellIcon className="h-6 w-6 text-brand-300" />
           <span className="font-semibold text-white">Exercise library</span>

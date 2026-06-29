@@ -4,6 +4,7 @@ import { getExerciseById } from '../data/exercises'
 import { EQUIPMENT_LABELS, EXPERIENCE_LABELS, GOAL_LABELS } from '../lib/planGenerator'
 import type { PlannedSet } from '../types'
 import { SparkIcon } from '../components/Icons'
+import RestTimer from '../components/RestTimer'
 
 function fmtRest(s: number) {
   if (s >= 60) {
@@ -47,6 +48,10 @@ function ExerciseRow({ block }: { block: PlannedSet }) {
               <span className="font-semibold text-white/60">Avoid:</span> {ex.commonMistakes.join(' · ')}
             </p>
           )}
+          <div>
+            <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-brand-200/80">Rest timer</p>
+            <RestTimer seconds={block.restSeconds} />
+          </div>
         </div>
       )}
     </div>

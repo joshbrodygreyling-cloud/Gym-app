@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useApp, useStreak } from '../context/AppContext'
 import { toDateKey, todayKey } from '../lib/streak'
+import { achievementsFor } from '../lib/achievements'
 import { CheckIcon, FlameIcon } from '../components/Icons'
 
 const WEEKDAYS = ['M', 'T', 'W', 'T', 'F', 'S', 'S']
@@ -24,6 +25,8 @@ export default function StreakPage() {
 
   const changeMonth = (delta: number) => setViewDate(new Date(year, month + delta, 1))
   const wentToday = hasVisit(today)
+  const achievements = achievementsFor(stats)
+  const unlockedCount = achievements.filter((a) => a.unlocked).length
 
   return (
     <div className="space-y-5">
@@ -130,6 +133,31 @@ export default function StreakPage() {
           <span className="flex items-center gap-1.5">
             <span className="h-3 w-3 rounded bg-white/10 ring-2 ring-brand-300" /> Today
           </span>
+        </div>
+      </div>
+
+      {/* Achievements */}
+      <div className="card">
+        <div className="mb-3 flex items-center justify-between">
+          <h3 className="text-sm font-bold text-brand-200">Achievements</h3>
+          <span className="text-xs text-white/45">
+            {unlockedCount}/{achievements.length} unlocked
+          </span>
+        </div>
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+          {achievements.map((a) => (
+            <div
+              key={a.id}
+              className={`rounded-xl border p-3 text-center transition ${
+                a.unlocked ? 'border-brand-400/40 bg-brand-500/10' : 'border-white/5 bg-white/[0.02] opacity-50'
+              }`}
+              title={a.desc}
+            >
+              <div className={`text-2xl ${a.unlocked ? '' : 'grayscale'}`}>{a.emoji}</div>
+              <p className="mt-1 text-xs font-semibold text-white">{a.title}</p>
+              <p className="text-[10px] leading-tight text-white/45">{a.desc}</p>
+            </div>
+          ))}
         </div>
       </div>
 

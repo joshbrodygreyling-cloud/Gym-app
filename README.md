@@ -40,6 +40,27 @@ library instantly.
 A browsable, searchable library of machines and exercises, each with how-to
 steps, coaching tips, and common mistakes to avoid. Filter by muscle group.
 
+### 🥗 Nutrition targets
+Personalised daily calorie and macro targets calculated from your stats:
+
+- **BMR** via the Mifflin–St Jeor equation and **TDEE** from your training
+  frequency.
+- Calories adjusted for your goal (deficit, surplus or maintenance).
+- Protein / carbs / fat breakdown plus a daily water guideline and practical
+  eating tips.
+
+### ⏱️ Built-in rest timer
+Every exercise in your plan has a one-tap countdown rest timer (pre-set to the
+recommended rest for that exercise) with a gentle audio cue when it's done.
+
+### 🧮 Gym tools
+- **1-rep-max estimator** (Epley) with a full %1RM training table.
+- **Barbell plate calculator** that tells you exactly what to load on each side,
+  in kg or lb.
+
+### 🏅 Achievements
+Unlock motivational badges as you build your streak and rack up visits.
+
 ## Tech
 
 - **React 18 + TypeScript + Vite**

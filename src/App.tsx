@@ -8,6 +8,8 @@ import IdentifyPage from './pages/IdentifyPage'
 import StreakPage from './pages/StreakPage'
 import LibraryPage from './pages/LibraryPage'
 import ProfilePage from './pages/ProfilePage'
+import NutritionPage from './pages/NutritionPage'
+import ToolsPage from './pages/ToolsPage'
 
 const NAV = [
   { to: '/', label: 'Home', icon: HomeIcon, end: true },
@@ -92,6 +94,8 @@ export default function App() {
           <Route path="/identify" element={<IdentifyPage />} />
           <Route path="/streak" element={<StreakPage />} />
           <Route path="/library" element={<LibraryPage />} />
+          <Route path="/nutrition" element={<NutritionPage />} />
+          <Route path="/tools" element={<ToolsPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
